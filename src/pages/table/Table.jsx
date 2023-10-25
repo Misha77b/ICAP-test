@@ -81,6 +81,7 @@ const Table = () => {
   return (
     <Box
       sx={{
+        marginTop: "30px",
         display: "felx",
         justifyContent: "center",
         alignItems: "center",

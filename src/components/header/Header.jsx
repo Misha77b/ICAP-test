@@ -5,7 +5,6 @@ const Header = () => {
   return (
     <Box
       sx={{
-        marginBottom: "30px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
