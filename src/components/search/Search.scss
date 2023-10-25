@@ -1,0 +1,31 @@
+.search {
+  position: relative;
+  &__input {
+    height: 48px;
+    width: 100%;
+    border: 1px solid #6e798c;
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding: 16px 16px 16px 40px;
+  }
+  &__icon {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+  }
+}
+.search .MuiButton-root {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+}
+
+.search__input {
+  font-family: "Roboto";
+  font-size: 16px;
+}
+
+.search__input:focus {
+  outline: none;
+  border: 2px solid rgba(0, 0, 0, 0.8);
+}
