@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import useLocationParams from "../../hooks/useLocationParams";
 import { useSearchParams } from "react-router-dom";
 import { fetchTableData } from "../../store/reducers/tableDataSlice";
@@ -8,7 +9,7 @@ import Loader from "../../components/loader/Loader";
 // import Search from "../../components/search/Search";
 import Tables from "../../components/tables/Tables";
 import PaginationNav from "../../components/pagination/PaginationNav";
-import {goBackBtnStyle} from "./login/formStyle"
+import { goBackBtnStyle } from "../login/formStyle";
 
 const Table = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const Table = () => {
 
   // filters
   const [value, setValue] = useState("");
-//   const searchValue = search.get("name");
+  //   const searchValue = search.get("name");
 
   // selectors
   const tableDataInfo = useSelector(
@@ -33,18 +34,18 @@ const Table = () => {
   );
   const loader = useSelector((state) => state.tableDataReducer.loader);
 
-//   const handleChange = (e) => {
-//     setValue(e.target.value);
-//     search.delete("offset");
+  //   const handleChange = (e) => {
+  //     setValue(e.target.value);
+  //     search.delete("offset");
 
-//     if (e.target.value < 1) {
-//       search.delete("name");
-//       setSearch(search);
-//     } else {
-//       search.set("name", e.target.value);
-//       setSearch(search);
-//     }
-//   };
+  //     if (e.target.value < 1) {
+  //       search.delete("name");
+  //       setSearch(search);
+  //     } else {
+  //       search.set("name", e.target.value);
+  //       setSearch(search);
+  //     }
+  //   };
 
   //   const clearSearch = () => {
   //     if (searchValue) {
@@ -63,11 +64,11 @@ const Table = () => {
     }
   }, [currentOffset]);
 
-//   useEffect(() => {
-//     if (searchValue) {
-//       setValue(searchValue);
-//     }
-//   }, [searchValue]);
+  //   useEffect(() => {
+  //     if (searchValue) {
+  //       setValue(searchValue);
+  //     }
+  //   }, [searchValue]);
 
   useEffect(() => {
     if (value.length < 1) {
@@ -83,8 +84,13 @@ const Table = () => {
         display: "felx",
         justifyContent: "center",
         alignItems: "center",
+        position: "relative",
       }}
     >
+      {/* Go back btn */}
+      <Button component={Link} to="/" sx={goBackBtnStyle}>
+        Go back
+      </Button>
       {loader ? (
         <Box
           sx={{
@@ -104,14 +110,8 @@ const Table = () => {
             display: "flex",
             flexDirection: "column",
             gap: "20px",
-            position: 'relative'
           }}
         >
-            {/* Go back btn */}
-      <Button component={Link} to="/" sx={goBackBtnStyle}>
-        Go back
-      </Button>
-
           {/* <Search
             value={value}
             change={handleChange}
