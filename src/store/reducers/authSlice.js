@@ -16,14 +16,15 @@ export const fetchAuth = createAsyncThunk("auth", async (userData) => {
       body: JSON.stringify(userData),
     }
   )
-    // .then((res) => {
-    //   if (res.status !== 200) {
-    //     return;
-    //   } else {
-    //     return res.text();
-    //   }
-    // })
-    .then((res) => res.json())
+    .then((res) => {
+      if (res.status !== 200) {
+        alert("Wrong login or password, try again");
+        return;
+      } else {
+        res.json();
+        localStorage.setItem("auth", true);
+      }
+    })
     .catch((err) => {
       console.warn(err);
     });

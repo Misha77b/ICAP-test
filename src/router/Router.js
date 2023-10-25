@@ -4,6 +4,7 @@ import RootRouter from "./RootRouter";
 import Home from "../pages/home/Home";
 import NotFoundPage from "../pages/notFound/NotFoundPage";
 import LogIn from "../pages/login/LogIn";
+import Table from "../pages/table/Table";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,11 @@ export const router = createBrowserRouter([
       {
         path: "/log-in",
         element: <LogIn />,
+      },
+      //   table
+      {
+        path: "/table",
+        element: <Table />,
       },
     ],
   },

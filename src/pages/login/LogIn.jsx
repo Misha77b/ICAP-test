@@ -13,8 +13,6 @@ const LogIn = () => {
 
   const isAuth = useSelector((state) => state.authReducer.isAuth);
   const loader = useSelector((state) => state.authReducer.loader);
-  console.log("auth state", isAuth);
-  console.log("loader state", loader);
 
   return (
     <Box sx={loginBoxStyle}>
@@ -27,7 +25,7 @@ const LogIn = () => {
       </Button>
 
       {/* Login from */}
-      <AuthForm handleOpen={handleOpen} />
+      <AuthForm loader={loader} handleOpen={handleOpen} />
     </Box>
   );
 };
