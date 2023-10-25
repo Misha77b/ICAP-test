@@ -23,6 +23,7 @@ export const fetchAuth = createAsyncThunk("auth", async (userData) => {
       } else {
         res.json();
         localStorage.setItem("auth", true);
+        alert("Log in success");
       }
     })
     .catch((err) => {

@@ -14,7 +14,7 @@ export const loginFormStyle = {
     "rgba(255, 134, 142, 0.8) 0px 2px 4px, rgba(255, 134, 142, 0.6) 0px 7px 13px -3px, rgba(255, 134, 142, 0.6) 0px -3px 0px inset",
 };
 
-export const loginBtnStyle = {
+export const submitBtnStyle = {
   fontSize: "18px",
   width: "250px",
   transition: "0.3s",

@@ -25,7 +25,7 @@ const LogIn = () => {
       </Button>
 
       {/* Login from */}
-      <AuthForm loader={loader} handleOpen={handleOpen} />
+      <AuthForm isAuth={isAuth} loader={loader} handleOpen={handleOpen} />
     </Box>
   );
 };
