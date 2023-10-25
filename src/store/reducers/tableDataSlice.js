@@ -8,10 +8,9 @@ const initialState = {
 
 export const fetchTableData = createAsyncThunk(
   "tableData/fetchData",
-  async () => {
-    //   async ({ params }) => {
+  async ({ params }) => {
     const response = await fetch(
-      `https://technical-task-api.icapgroupgmbh.com/api/table/?format=json`,
+      `https://technical-task-api.icapgroupgmbh.com/api/table/?format=json&limit=10&${params}0`,
       {
         method: "GET",
         headers: {

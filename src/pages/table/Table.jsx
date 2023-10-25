@@ -5,7 +5,10 @@ import useLocationParams from "../../hooks/useLocationParams";
 import { useSearchParams } from "react-router-dom";
 import { fetchTableData } from "../../store/reducers/tableDataSlice";
 import Loader from "../../components/loader/Loader";
-import Search from "../../components/search/Search";
+// import Search from "../../components/search/Search";
+import Tables from "../../components/tables/Tables";
+import PaginationNav from "../../components/pagination/PaginationNav";
+import {goBackBtnStyle} from "./login/formStyle"
 
 const Table = () => {
   const dispatch = useDispatch();
@@ -14,12 +17,12 @@ const Table = () => {
   const { params } = useLocationParams();
 
   // pagination
-  const [pageNumber, setPageNumber] = useState(1);
-  const currentPage = search.get("page");
+  const [offsetNumber, setOffsetNumber] = useState(1);
+  const currentOffset = search.get("offset");
 
   // filters
   const [value, setValue] = useState("");
-  const searchValue = search.get("name");
+//   const searchValue = search.get("name");
 
   // selectors
   const tableDataInfo = useSelector(
@@ -29,25 +32,23 @@ const Table = () => {
     (state) => state.tableDataReducer.tableDataResults
   );
   const loader = useSelector((state) => state.tableDataReducer.loader);
-  console.log(tableDataInfo);
-  console.log(tableDataResults);
 
-  const handleChange = (e) => {
-    setValue(e.target.value);
-    search.delete("page");
+//   const handleChange = (e) => {
+//     setValue(e.target.value);
+//     search.delete("offset");
 
-    if (e.target.value < 1) {
-      search.delete("name");
-      setSearch(search);
-    } else {
-      search.set("name", e.target.value);
-      setSearch(search);
-    }
-  };
+//     if (e.target.value < 1) {
+//       search.delete("name");
+//       setSearch(search);
+//     } else {
+//       search.set("name", e.target.value);
+//       setSearch(search);
+//     }
+//   };
 
   //   const clearSearch = () => {
   //     if (searchValue) {
-  //       search.delete("page");
+  //       search.delete("offset");
   //       search.delete("name");
   //       setSearch(search);
   //       setValue("");
@@ -55,28 +56,26 @@ const Table = () => {
   //   };
 
   useEffect(() => {
-    if (currentPage === null) {
-      setPageNumber(currentPage ? parseInt(currentPage) : 1);
+    if (currentOffset === null) {
+      setOffsetNumber(currentOffset ? parseInt(currentOffset) : 1);
     } else {
-      setPageNumber(currentPage ? parseInt(currentPage) : 1);
+      setOffsetNumber(currentOffset ? parseInt(currentOffset) : 1);
     }
-  }, [currentPage]);
+  }, [currentOffset]);
 
-  useEffect(() => {
-    if (searchValue) {
-      setValue(searchValue);
-    }
-  }, [searchValue]);
+//   useEffect(() => {
+//     if (searchValue) {
+//       setValue(searchValue);
+//     }
+//   }, [searchValue]);
 
   useEffect(() => {
     if (value.length < 1) {
-      dispatch(fetchTableData());
-      //   dispatch(fetchCharacters({ params }));
+      dispatch(fetchTableData({ params }));
     } else {
-      dispatch(fetchTableData());
-      //   dispatch(fetchCharacters({ params }));
+      dispatch(fetchTableData({ params }));
     }
-  }, [pageNumber, value, params]);
+  }, [offsetNumber, value, params]);
 
   return (
     <Box
@@ -98,11 +97,31 @@ const Table = () => {
           <Loader />
         </Box>
       ) : (
-        <Box sx={{ width: "600px", margin: "0 auto" }}>
-          <Search
+        <Box
+          sx={{
+            width: "600px",
+            margin: "0 auto",
+            display: "flex",
+            flexDirection: "column",
+            gap: "20px",
+            position: 'relative'
+          }}
+        >
+            {/* Go back btn */}
+      <Button component={Link} to="/" sx={goBackBtnStyle}>
+        Go back
+      </Button>
+
+          {/* <Search
             value={value}
             change={handleChange}
-            // clearSearch={clearSearch}
+            clearSearch={clearSearch}
+          /> */}
+          <Tables tableData={tableDataResults} />
+          <PaginationNav
+            totalPages={tableDataInfo.count}
+            pageNumber={offsetNumber}
+            setPageNumber={setOffsetNumber}
           />
         </Box>
       )}

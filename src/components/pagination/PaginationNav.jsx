@@ -7,14 +7,15 @@ import "./PaginationNav.scss";
 
 const PaginationNav = ({ totalPages, pageNumber, setPageNumber }) => {
   const [search, setSearch] = useSearchParams();
+  const totalPagesCount = Math.round(totalPages / 10) - 2;
 
   const handlePageChange = (_, num) => {
     setPageNumber(num);
 
-    search.set("page", num);
+    search.set("offset", num);
     setSearch(search);
     if (num === 1) {
-      search.delete("page");
+      search.delete("offset");
       setSearch(search);
     }
   };
@@ -22,7 +23,7 @@ const PaginationNav = ({ totalPages, pageNumber, setPageNumber }) => {
   return (
     <Stack sx={{ margin: "30px auto 20px" }}>
       <Pagination
-        count={totalPages || 0}
+        count={totalPagesCount || 0}
         page={pageNumber}
         onChange={handlePageChange}
         size={"small"}
