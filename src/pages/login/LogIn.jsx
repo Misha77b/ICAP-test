@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import { Box, TextField, Button, Tooltip } from "@mui/material";
@@ -8,15 +9,24 @@ import {
   loginFormStyle,
   loginBtnStyle,
 } from "./formStyle";
+import { useSelector } from "react-redux";
+import { fetchAuth } from "../../store/reducers/authSlice";
 
 const LogIn = () => {
+  const dispatch = useDispatch();
+
+  const isAuth = useSelector((state) => state.authReducer.isAuth);
+  const loader = useSelector((state) => state.authReducer.loader);
+  console.log("auth state", isAuth);
+  console.log("loader state", loader);
+
   const formik = useFormik({
     initialValues: {
       username: "",
       password: "",
     },
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      dispatch(fetchAuth(values));
     },
   });
 
